@@ -1,11 +1,11 @@
 version: 1.0
 service:
-  name: my-fastapi-service
+  name: personalised-nudges-service
   sourceConfiguration:
     imageRepository:
       imageIdentifier: 241759873015.dkr.ecr.eu-central-1.amazonaws.com/my-fastapi-app:latest
       imageConfiguration:
-        port: 8000
+        port: 80
       imageRepositoryType: ECR
   instanceConfiguration:
     cpu: 1024
@@ -16,12 +16,16 @@ service:
     maxSize: 5
   healthCheckConfiguration:
     protocol: HTTP
-    path: /health
-    interval: 5
-    timeout: 2
+    path: /
+    interval: 10
+    timeout: 5
     healthyThreshold: 2
     unhealthyThreshold: 2
   environment:
     variables:
-      - name: ENV_VAR_NAME
-        value: ENV_VAR_VALUE
+      - name: POSTGRES_USER
+        value: ameazza
+      - name: POSTGRES_PASSWORD
+        value: password
+      - name: POSTGRES_DB
+        value: nudges
